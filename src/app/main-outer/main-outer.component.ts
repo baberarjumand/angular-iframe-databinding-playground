@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Event } from '@angular/router';
 
 @Component({
   selector: 'app-main-outer',
   templateUrl: './main-outer.component.html',
-  styleUrls: ['./main-outer.component.scss']
+  styleUrls: ['./main-outer.component.scss'],
 })
 export class MainOuterComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onEventEmit(event: string) {
+    console.log(event);
   }
-
 }
