@@ -4,12 +4,35 @@
       <h1 style="text-align: center">Main Component</h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="text-align: center">
     <div class="col">
-      <app-inner (eventEmit)="onEventEmit($event)"></app-inner>
+      <button class="btn btn-primary m-2" (click)="onIncrement(1)">
+        Increment Counter 1
+      </button>
+      <br />
+      <button class="btn btn-primary m-2" (click)="onReset(1)">
+        Reset Counter 1
+      </button>
+      <br />
+      <button class="btn btn-primary m-2" (click)="onIncrement(2)">
+        Increment Counter 2
+      </button>
+      <br />
+      <button class="btn btn-primary m-2" (click)="onReset(2)">
+        Reset Counter 2
+      </button>
+      <br />
     </div>
-    <div class="col">
-      <app-inner (eventEmit)="onEventEmit($event)"></app-inner>
+  </div>
+  <div class="row">
+    <div class="col box">
+      <!-- <app-inner (eventEmit)="onEventEmit($event)"></app-inner> -->
+      <!-- <iframe style="width: 100%;" #frame01 (load)="onLoad(frame01, doc01, comp01Ref, 'innerComp01')"></iframe> -->
+      <iframe #frame01 style="width: 100%" src="/inner?counter=1"></iframe>
+    </div>
+    <div class="col box">
+      <!-- <app-inner (eventEmit)="onEventEmit($event)"></app-inner> -->
+      <iframe #frame02 style="width: 100%" src="/inner?counter=2"></iframe>
     </div>
   </div>
 </div>

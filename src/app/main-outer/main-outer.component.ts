@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '@angular/router';
 
 @Component({
   selector: 'app-main-outer',
@@ -9,9 +8,34 @@ import { Event } from '@angular/router';
 export class MainOuterComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.addEventListener('message', (event) => {
+      if (typeof event === 'object') {
+        const obj = JSON.parse(event.data);
+        if (obj.hasOwnProperty('msg')) {
+          console.log(obj['msg']);
+        }
+      }
+    });
+  }
 
-  onEventEmit(event: string) {
-    console.log(event);
+  // onEventEmit(event: string | any) {
+  //   console.log(event);
+  // }
+
+  onReset(counterNum: number) {
+    const obj = {
+      counterNum: counterNum,
+      op: 'reset',
+    };
+    window.postMessage(JSON.stringify(obj), '*');
+  }
+
+  onIncrement(counterNum: number) {
+    const obj = {
+      counterNum: counterNum,
+      op: 'increment',
+    };
+    window.postMessage(JSON.stringify(obj), '*');
   }
 }
