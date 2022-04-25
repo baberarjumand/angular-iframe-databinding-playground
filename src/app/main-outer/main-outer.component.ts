@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-outer',
@@ -8,15 +8,25 @@ import { Component, OnInit } from '@angular/core';
 export class MainOuterComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {
-    window.addEventListener('message', (event) => {
-      if (typeof event === 'object') {
-        const obj = JSON.parse(event.data);
-        if (obj.hasOwnProperty('msg')) {
-          console.log(obj['msg']);
-        }
+  @HostListener('window:message', ['$event'])
+  onMessage(event: any) {
+    if (typeof event === 'object' && event.data['data'] !== undefined) {
+      const obj = JSON.parse(event.data);
+      if (obj.hasOwnProperty('msg')) {
+        console.log(obj['msg']);
       }
-    });
+    }
+  }
+
+  ngOnInit(): void {
+    // window.addEventListener('message', (event) => {
+    //   if (typeof event === 'object') {
+    //     const obj = JSON.parse(event.data);
+    //     if (obj.hasOwnProperty('msg')) {
+    //       console.log(obj['msg']);
+    //     }
+    //   }
+    // });
   }
 
   // onEventEmit(event: string | any) {
